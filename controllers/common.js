@@ -13,8 +13,8 @@ exports.checkInTicket = async (
     ) {
       console.log("INSIDE CHEKC INNNNNN");
       try {
-        await client.connect();
-        const db = client.db("metro");
+        // await client.connect();
+        const db = await client.db("test");
         const collection = db.collection("tickets");
         const ticket = await collection.updateOne(
           { ticket_id: ticket_id },
@@ -54,8 +54,8 @@ exports.checkOutTicket = async (
           moment().isBefore(moment(created_at, "dddd, MMMM Do YYYY, h:mm:ss a").add(2, "hours"))       
            ) {
           console.log("INSIDE CHEKC OUTTTTT");
-          await client.connect();
-          const db = client.db("metro");
+          // await client.connect();
+          const db = await client.db("test");
           const collection = db.collection("tickets");
           const ticket = await collection.updateOne(
             { ticket_id: ticket_id },
@@ -69,8 +69,8 @@ exports.checkOutTicket = async (
         return { ok: false, details: "Please Contact Customer Care" };
       }
     } else {
-      await client.connect();
-      const db = client.db("metro");
+      // await client.connect();
+      const db = await client.db("test");
       const collection = db.collection("station_details");
 
       const station_fetched_data = await collection.find().toArray();
@@ -126,8 +126,8 @@ exports.checkOutTicket = async (
             moment().isBefore(moment(created_at, "dddd, MMMM Do YYYY, h:mm:ss a").add(2, "hours"))       
              ) {
             console.log("INSIDE CHEKC OUTTTTT");
-            await client.connect();
-            const db = client.db("metro");
+            // await client.connect();
+            const db = client.db("test");
             const collection = db.collection("tickets");
             const ticket = await collection.updateOne(
               { ticket_id: ticket_id },
@@ -141,8 +141,8 @@ exports.checkOutTicket = async (
           return { ok: false, details: "Please Contact Customer Care" };
         }
       } else {
-        await client.connect();
-        const db = client.db("metro");
+        // await client.connect();
+        const db = await client.db("test");
         const collection = db.collection("station_details");
   
         const station_fetched_data = await collection.find().toArray();

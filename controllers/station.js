@@ -5,15 +5,15 @@ const {dijkstra,minDistance} = require('../utility/utility.js')
 exports.addStationDetails = async ()=> {
     try {
         stationCachedData = {}
-        await client.connect();
-        const db = client.db('metro');
+        // await client.connect();
+        const db = await  client.db('test');
         const collection = db.collection('station_details');
             
           await collection.insertMany(stationData);
     
-        const databasesList = await client.db().admin().listDatabases();
+        // const databasesList = await client.db().admin().listDatabases();
  
-        databasesList.databases.forEach(db => console.log(` - ${db.name}`));
+        // databasesList.databases.forEach(db => console.log(` - ${db.name}`));
       } 
       catch (err){
         console.log(err)
@@ -23,8 +23,8 @@ exports.addStationDetails = async ()=> {
 
 exports.getStationsDetails = async (city) => {
     try {
-        await client.connect();
-        const db = client.db('metro');
+        // await client.connect();
+        const db = await client.db('test');
         const upper_case_city = city.toUpperCase();
         const collection = db.collection('station_details');
         const station_fetched_data =   await collection.find({city:upper_case_city}).toArray();
@@ -61,8 +61,8 @@ exports.ticketFareCalculator = async (src,dest,city)=> {
             
         } 
         else {
-        await client.connect();
-        const db = client.db('metro');
+        // await client.connect();
+        const db = await client.db('test');
         const collection = db.collection('station_details');
             
         const station_fetched_data =   await collection.find({city: city.toUpperCase()}).toArray();
@@ -118,8 +118,8 @@ exports.ticketFareCalculator = async (src,dest,city)=> {
             
         } 
         else {
-        await client.connect();
-        const db = client.db('metro');
+        // await client.connect();
+        const db = await client.db('test');
         const collection = db.collection('station_details');
             
         const station_fetched_data =   await collection.find({city: city.toUpperCase()}).toArray();

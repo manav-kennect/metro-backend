@@ -47,8 +47,8 @@
  
  module.exports = {
      issueToken: async data => {
-        await client.connect();
-        const db = client.db('metro');
+        // console.log(client)
+        const db = await client.db('test');
          let query = {
              username: data.username.toLowerCase(),
              password: data.password,

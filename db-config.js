@@ -1,10 +1,18 @@
-const {MongoClient} = require('mongodb');
-
-exports.connect2DB= function connect2DB() {
-    const client = new MongoClient(process.env.DB_URL);
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://manav-kennect:manavkennect9@cluster0.yjuwt8o.mongodb.net/?retryWrites=true&w=majority";
+exports.connect2DB= async function connect2DB() {
+    
     try {
-        // Connect to the MongoDB cluster
-        return client;
+        global.client = new MongoClient(uri, {
+            serverApi: {
+              version: ServerApiVersion.v1,
+              strict: true,
+              deprecationErrors: true,
+            }
+          });
+
+        await client.connect()
+        // console.log(client)
  
     } catch (e) {
         console.error(e);

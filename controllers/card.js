@@ -3,8 +3,8 @@ let  stationCachedData =  require('../utility/cached-data.js')
 
 exports.addCard = async (cardData) => {
   try {
-    await client.connect();
-    const db = client.db("metro");
+    // await client.connect();
+    const db = await client.db("test");
     const collection = db.collection("carddetails");
     const res = await collection.insertOne(cardData);
     console.log(res);
@@ -17,8 +17,8 @@ exports.addCard = async (cardData) => {
 exports.getCard = async (user) => {
   try {
     console.log("INside get card");
-    await client.connect();
-    const db = client.db("metro");
+    // await client.connect();
+    const db = await  client.db("test");
     const collection = db.collection("carddetails");
     const res = await collection.findOne(
       { user: user },
@@ -32,8 +32,8 @@ exports.getCard = async (user) => {
 
 exports.cardCheckIn = async (cardnumber, city) => {
   try {
-    await client.connect();
-    const db = client.db("metro");
+    // await client.connect();
+    const db = client.db("test");
     const collection = db.collection("carddetails");
     const currentTime = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
     await collection.updateOne(
@@ -49,8 +49,8 @@ exports.cardCheckIn = async (cardnumber, city) => {
 
 exports.cardCheckOut = async (cardnumber, city,dest) => {
   try {
-    await client.connect();
-    const db = client.db("metro");
+    // await client.connect();
+    const db = await client.db("test");
     const collection = db.collection("carddetails");
     const currentCardCheckInDetails = await collection.findOne(
       { cardnumber: cardnumber },
@@ -86,8 +86,8 @@ exports.cardCheckOut = async (cardnumber, city,dest) => {
               return 30;
             }
           } else {
-            await client.connect();
-            const db = client.db("metro");
+            // await client.connect();
+            const db =  await client.db("test");
             const collection = db.collection("station_details");
 
             const station_fetched_data = await collection
@@ -155,8 +155,8 @@ exports.cardCheckOut = async (cardnumber, city,dest) => {
               fare = 30;
             }
           } else {
-            await client.connect();
-            const db = client.db("metro");
+            // await client.connect();
+            const db = await client.db("test");
             const collection = db.collection("station_details");
 
             const station_fetched_data = await collection

@@ -4,8 +4,8 @@ const moment = require("moment");
 
 exports.addTicketsDetails = async (ticketData)=> {
     try {
-        await client.connect();
-        const db = client.db('metro');
+        // await client.connect();
+        const db = await client.db('test');
         const collection = db.collection('tickets');    
         const added_tickets =   await collection.insertOne(ticketData);
 
@@ -19,8 +19,8 @@ exports.addTicketsDetails = async (ticketData)=> {
 
 exports.updateTicketDetails = async (ticket_id) => {
     try {
-        await client.connect();
-        const db = client.db('metro');
+        // await client.connect();
+        const db = await client.db('test');
         const collection = db.collection('tickets');
         const created_at = moment().format("dddd, MMMM Do YYYY, h:mm:ss a")
         const valid_upto = moment().add(5, 'minutes').format("dddd, MMMM Do YYYY, h:mm:ss a");
@@ -36,8 +36,8 @@ exports.updateTicketDetails = async (ticket_id) => {
 
 exports.getTicketDetails = async (ticket_id) => {
     try {
-        await client.connect();
-        const db = client.db('metro');
+        // await client.connect();
+        const db = await client.db('test');
         const collection = db.collection('tickets');
         const ticket =   await collection.findOne({'ticket_id': ticket_id},{'projection': {
         source:1,
@@ -63,8 +63,8 @@ exports.getTicketDetails = async (ticket_id) => {
 
 exports.getTicketDetailsByUser = async (user) => {
   try {
-      await client.connect();
-      const db = client.db('metro');
+      // await client.connect();
+      const db = await client.db('test');
       const collection = db.collection('tickets');
       // const ticket =   await collection.findOne({'userid': user},{'projection': {
       //   source:1,

@@ -10,7 +10,8 @@ const authRouter = require('../metro-backend/routes/auth.js')
 const adminRouter = require('../metro-backend/routes/admin.js')
 const cardRouter = require('../metro-backend/routes/card.js')
 const app = express();
-global.client = connect2DB();
+connect2DB();
+// console.log(client)
 
 
 app.use(cors())
