@@ -2,16 +2,15 @@ require('dotenv').config();
 const express = require('express');
 const {connect2DB} = require('./db-config.js')
 const cors = require('cors')
-const {ticketRouter} = require('./routes/tickets.js')
-const {stationRouter} = require('./routes/station.js')
-const {commonRouter} = require('./routes/common.js')
-const {userRouter} = require('./routes/user.js')
-const {authRouter} = require('./routes/auth.js')
-const {adminRouter} = require('./routes/admin.js')
-const {cardRouter} = require('./routes/card.js')
-console.log("HERRRRRRRRRRRRRRRRRRRRRRR")
+const ticketRouter = require('./routes/tickets.js')
+const stationRouter = require('./routes/station.js')
+const commonRouter = require('./routes/common.js')
+const userRouter = require('./routes/user.js')
+const authRouter = require('./routes/auth.js')
+const adminRouter = require('./routes/admin.js')
+const cardRouter = require('./routes/card.js')
+console.log(process.env.PORT,"HERRRRRRRRRRRRRRRRRRRRRRR")
 const app = express();
-const port = 11001
 connect2DB();
 // console.log(client)
 
