@@ -13,7 +13,7 @@ stationRouter.get('/station-list',async (req,res,next) => {
     res.send(station_details)
    }
    else{
-    res.json({'err':"noffffffffff"})
+    res.json({'err':client})
    }
 }
    catch(ddd) {
