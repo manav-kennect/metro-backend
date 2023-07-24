@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 const express = require('express');
 const {connect2DB} = require('./db-config.js')
 const cors = require('cors')
@@ -9,7 +9,9 @@ const {userRouter} = require('./metro-backend/routes/user.js')
 const {authRouter} = require('./metro-backend/routes/auth.js')
 const {adminRouter} = require('./metro-backend/routes/admin.js')
 const {cardRouter} = require('./metro-backend/routes/card.js')
+console.log("HERRRRRRRRRRRRRRRRRRRRRRR")
 const app = express();
+const port = 11001
 connect2DB();
 // console.log(client)
 
@@ -29,6 +31,6 @@ app.get('/',(req,res)=>{
     res.send('<h1>The server started</h1>')
 })
 
-app.listen(process.env.PORT,()=>{
-    console.log(`Server Started at Port ${process.env.PORT}`)
+app.listen(port,()=>{
+    console.log(`Server Started at Port ${port}`)
 })
