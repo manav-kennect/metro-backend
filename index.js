@@ -25,6 +25,10 @@ app.use('/api',userRouter)
 app.use('/api',authRouter)
 app.use('/api',cardRouter)
 
+app.get('/',(req,res)=>{
+    res.send('<h1>The server started</h1>')
+})
+
 app.listen(process.env.PORT,()=>{
     console.log(`Server Started at Port ${process.env.PORT}`)
 })
