@@ -11,10 +11,10 @@ const adminRouter = require('./routes/admin.js')
 const cardRouter = require('./routes/card.js')
 console.log(process.env.PORT,"HERRRRRRRRRRRRRRRRRRRRRRR")
 const app = express();
-connect2DB();
+
 // console.log(client)
 
-
+connect2DB();
 app.use(cors())
 app.use(express.json())
 
