@@ -10,7 +10,7 @@ stationRouter.get('/station-list',async (req,res,next) => {
    const station_details = await getStationsDetails(req.query.city);
    if(station_details.length !== 0) {
     console.log("here")
-    res.send(station_details)
+    res.json({station_details:station_details})
    }
    else{
     res.json({'err':client})
