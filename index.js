@@ -1,14 +1,14 @@
-// require('dotenv').config();
+require('dotenv').config();
 const express = require('express');
 const {connect2DB} = require('./db-config.js')
 const cors = require('cors')
-const {ticketRouter} = require('./metro-backend/routes/tickets.js')
-const {stationRouter} = require('./metro-backend/routes/station.js')
-const {commonRouter} = require('./metro-backend/routes/common.js')
-const {userRouter} = require('./metro-backend/routes/user.js')
-const {authRouter} = require('./metro-backend/routes/auth.js')
-const {adminRouter} = require('./metro-backend/routes/admin.js')
-const {cardRouter} = require('./metro-backend/routes/card.js')
+const {ticketRouter} = require('./routes/tickets.js')
+const {stationRouter} = require('./routes/station.js')
+const {commonRouter} = require('./routes/common.js')
+const {userRouter} = require('./routes/user.js')
+const {authRouter} = require('./routes/auth.js')
+const {adminRouter} = require('./routes/admin.js')
+const {cardRouter} = require('./routes/card.js')
 console.log("HERRRRRRRRRRRRRRRRRRRRRRR")
 const app = express();
 const port = 11001
@@ -31,6 +31,6 @@ app.get('/',(req,res)=>{
     res.send('<h1>The server started</h1>')
 })
 
-app.listen(port,()=>{
-    console.log(`Server Started at Port ${port}`)
+app.listen(process.env.PORT,()=>{
+    console.log(`Server Started at Port ${process.env.PORT}`)
 })
