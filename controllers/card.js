@@ -1,5 +1,6 @@
 const moment = require("moment");
-let  stationCachedData =  require('../utility/cached-data.js')
+let stationCachedData = require("../utility/cached-data.js");
+const { minDistance,dijkstra } = require("../utility/utility.js");
 
 exports.addCard = async (cardData) => {
   try {
@@ -18,7 +19,7 @@ exports.getCard = async (user) => {
   try {
     console.log("INside get card");
     // await client.connect();
-    const db = await  client.db("test");
+    const db = await client.db("test");
     const collection = db.collection("carddetails");
     const res = await collection.findOne(
       { user: user },
@@ -47,7 +48,7 @@ exports.cardCheckIn = async (cardnumber, city) => {
   }
 };
 
-exports.cardCheckOut = async (cardnumber, city,dest) => {
+exports.cardCheckOut = async (cardnumber, city, dest) => {
   try {
     // await client.connect();
     const db = await client.db("test");
@@ -56,15 +57,23 @@ exports.cardCheckOut = async (cardnumber, city,dest) => {
       { cardnumber: cardnumber },
       { projection: { amount: 1, status: 1 } }
     );
-    console.log("CUREENT CHECK IN NNNN DETAILSSSSSSSSS", currentCardCheckInDetails)
-    if (currentCardCheckInDetails.status[0] === "checkedin" && currentCardCheckInDetails.amount >=10 ) {
-      console.log("CUREENT CHECK IN NNNN DETAILSSSSSSSSS")
+    console.log(
+      "CUREENT CHECK IN NNNN DETAILSSSSSSSSS",
+      currentCardCheckInDetails
+    );
+    if (
+      currentCardCheckInDetails.status[0] === "checkedin" &&
+      currentCardCheckInDetails.amount >= 10
+    ) {
+      console.log("CUREENT CHECK IN NNNN DETAILSSSSSSSSS");
       let src = currentCardCheckInDetails.status[1];
       let fare = 0;
       try {
         if (city.toUpperCase() === "DELHI") {
           if (Object.keys(stationCachedData.delhi).length > 0) {
-            console.log("Inside CACHED DAtA00000000000000000000000000000000000000000000");
+            console.log(
+              "Inside CACHED DAtA00000000000000000000000000000000000000000000"
+            );
             if (stationCachedData[src][dest] <= 3) {
               return 10;
             } else if (
@@ -87,7 +96,7 @@ exports.cardCheckOut = async (cardnumber, city,dest) => {
             }
           } else {
             // await client.connect();
-            const db =  await client.db("test");
+            const db = await client.db("test");
             const collection = db.collection("station_details");
 
             const station_fetched_data = await collection
@@ -105,7 +114,8 @@ exports.cardCheckOut = async (cardnumber, city,dest) => {
             Object.keys(bi_directional_graph).forEach((key) => {
               stationCachedData.delhi[key] = dijkstra(
                 bi_directional_graph,
-                key
+                key,
+                minDistance
               );
             });
             console.log(stationCachedData.delhi[src][dest]);
@@ -133,7 +143,7 @@ exports.cardCheckOut = async (cardnumber, city,dest) => {
           }
         } else {
           if (Object.keys(stationCachedData.mumbai).length > 0) {
-            console.log("Inside CACHED DAtA");
+            console.log("Inside CACHED DAtA","MUMABIAA",src,dest,stationCachedData.mumbai[src][dest]);
             if (stationCachedData.mumbai[src][dest] <= 3) {
               fare = 10;
             } else if (
@@ -175,7 +185,7 @@ exports.cardCheckOut = async (cardnumber, city,dest) => {
             Object.keys(bi_directional_graph).forEach((key) => {
               stationCachedData.mumbai[key] = dijkstra(
                 bi_directional_graph,
-                key
+                key,minDistance
               );
             });
             console.log(stationCachedData.mumbai[src][dest]);
@@ -203,13 +213,19 @@ exports.cardCheckOut = async (cardnumber, city,dest) => {
           }
         }
         const cardAmount = currentCardCheckInDetails.amount - fare;
-        await collection.updateOne({cardnumber:cardnumber},{$set: {status: ["active"],amount: cardAmount}});
-        return {ok:true,result: "Successfully Checked Out"}
+        await collection.updateOne(
+          { cardnumber: cardnumber },
+          { $set: { status: ["active"], amount: cardAmount } }
+        );
+        return { ok: true, result: "Successfully Checked Out" };
       } catch (err) {
         return { ok: false, result: "Please Try Again " };
       }
     } else {
-      return { ok: false, result: "Please Check In First And Check you card balance" };
+      return {
+        ok: false,
+        result: "Please Check In First And Check you card balance",
+      };
     }
   } catch (err) {
     console.log(err);
