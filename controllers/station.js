@@ -42,17 +42,17 @@ exports.ticketFareCalculator = async (src,dest,city)=> {
         if(city.toUpperCase() === "DELHI") {
         if(Object.keys(stationCachedData.delhi).length > 0 ) {
             console.log("Inside CACHED DAtA")
-            if(stationCachedData[src][dest] <= 3) {
+            if(stationCachedData.delhi[src][dest] <= 3) {
                 return 10;
             }
-            else if(stationCachedData[src][dest] >3 && stationCachedData[src][dest] <=8) {
+            else if(stationCachedData.delhi[src][dest] >3 && stationCachedData.delhi[src][dest] <=8) {
                 return 15
             }
-            else if(stationCachedData[src][dest] >8 && stationCachedData[src][dest] <=15) {
+            else if(stationCachedData.delhi[src][dest] >8 && stationCachedData.delhi[src][dest] <=15) {
                 return 20
             }
     
-            else if(stationCachedData[src][dest] >15 && stationCachedData[src][dest] <=22) {
+            else if(stationCachedData.delhi[src][dest] >15 && stationCachedData.delhi[src][dest] <=22) {
                 return 25
             }
             else {

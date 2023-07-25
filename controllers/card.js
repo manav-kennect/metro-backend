@@ -74,21 +74,21 @@ exports.cardCheckOut = async (cardnumber, city, dest) => {
             console.log(
               "Inside CACHED DAtA00000000000000000000000000000000000000000000"
             );
-            if (stationCachedData[src][dest] <= 3) {
+            if (stationCachedData.delhi[src][dest] <= 3) {
               return 10;
             } else if (
-              stationCachedData[src][dest] > 3 &&
-              stationCachedData[src][dest] <= 8
+              stationCachedData.delhi[src][dest] > 3 &&
+              stationCachedData.delhi[src][dest] <= 8
             ) {
               return 15;
             } else if (
-              stationCachedData[src][dest] > 8 &&
-              stationCachedData[src][dest] <= 15
+              stationCachedData.delhi[src][dest] > 8 &&
+              stationCachedData.delhi[src][dest] <= 15
             ) {
               return 20;
             } else if (
-              stationCachedData[src][dest] > 15 &&
-              stationCachedData[src][dest] <= 22
+              stationCachedData.delhi[src][dest] > 15 &&
+              stationCachedData.delhi[src][dest] <= 22
             ) {
               return 25;
             } else {
