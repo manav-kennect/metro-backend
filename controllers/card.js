@@ -16,12 +16,12 @@ exports.addCard = async (cardData) => {
 
 exports.getCard = async (user) => {
   try {
-    console.log("INside get card");
+    console.log("INside get card",user);
     // await client.connect();
     const db = await  client.db("test");
     const collection = db.collection("carddetails");
     const res = await collection.findOne(
-      { user: user },
+      { cardnumber: user },
       { projection: { cardnumber: 1, user: 1, amount: 1, status: 1 } }
     );
     return res;
