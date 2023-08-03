@@ -35,7 +35,7 @@ dijkstra = (graph,src,minDistance)=>
     for(let count = 0; count < V-1; count++)
     {
         let u = minDistance(dist, sptSet);
-        console.log(u)
+        // console.log(u)
         sptSet[u] = true;
         for (let j = 0; j < graph[u].length; j++) {
             let v = graph[u][j][0];
@@ -56,7 +56,7 @@ dijkstra = (graph,src,minDistance)=>
             }
         }
     }
-    console.log(dist,"DISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSss")
+    // console.log(dist,"DISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSss")
 
     return dist
      

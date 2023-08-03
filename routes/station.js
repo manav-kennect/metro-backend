@@ -21,12 +21,12 @@ stationRouter.get('/station-list',async (req,res,next) => {
    }
 })
 
-stationRouter.get('/ticket-price/',jwtVerify,async (req,res,next) => {
+stationRouter.get('/ticket-price/',async (req,res,next) => {
     console.log(Object.values(req.query).length,"QUERY")
     if(req.query.src && req.query.des) {
     const price = await ticketFareCalculator(req.query.src,req.query.des,req.query.city);
     console.log(price)
-    res.json({ok:true,'ticketPrice':price})}
+    res.json({ok:true,'ticketPrice':price.fare,via: price.via})}
     else {
         res.json({ok:false,'ticketPrice': "Unable to find price For this route"})
     }

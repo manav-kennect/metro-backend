@@ -80,7 +80,7 @@ exports.checkOutTicket = async (
         bi_directional_graph[data["station_id"]] = data["linked_station"];
       });
 
-      console.log("Adjacency matrix stored in MongoDB.", bi_directional_graph);
+      // console.log("Adjacency matrix stored in MongoDB.", bi_directional_graph);
       Object.keys(bi_directional_graph).forEach((key) => {
         stationCachedData.delhi[key] = dijkstra(bi_directional_graph, key,minDistance);
       });
